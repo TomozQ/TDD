@@ -1,0 +1,11 @@
+version: '3.9'
+
+services: # 各コンテナを定義
+  php: # サービス名
+    build: ./ # 構築時のオプションを指定、今回はDockerfileの場所
+    container_name: phpunit # 任意のコンテナ名を設定
+    tty: true # コンテナを起動し続ける
+    volumes:
+      - type: bind # バインドマウントをする(ホストとコンテナを同期)
+        source: ./ # マウントするソースの場所(ホスト)
+        target: /app # マウント先の場所
