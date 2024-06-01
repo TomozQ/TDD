@@ -1,1 +1,1 @@
-{"version":1,"defects":{"FunctionTest::testHelloWorld":3},"times":{"FunctionTest::testHelloWorld":0.027}}
+{"version":1,"defects":{"FunctionTest::testHelloWorld":3,"MoneyTest::testMultiPlication":3},"times":{"FunctionTest::testHelloWorld":0.029,"MoneyTest::testMultiPlication":0}}
