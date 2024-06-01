@@ -1,12 +1,15 @@
 <?php
 
 class Dollar{
-  public int $amount = 10;
+  public int $amount;
 
-  public function __construct(int $amount){
+  public function __construct(int $amount)
+  {
+    $this->amount = $amount;
   }
 
   public function times(int $multiplier)
   {
+    $this->amount *= $multiplier;
   }
 }
