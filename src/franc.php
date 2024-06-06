@@ -1,8 +1,9 @@
 <?php
 
-class Franc{
-  private int $amount;
+require_once(dirname(__FILE__) ."/money.php");
 
+class Franc extends Money{
+  
   public function __construct(int $amount)
   {
     $this->amount = $amount;
@@ -11,19 +12,5 @@ class Franc{
   public function times(int $multiplier)
   {
     return new Franc($this->amount * $multiplier);
-  }
-
-  public function equals(object $object)
-  {
-    $franc = $this::cast($object);
-    return $this->amount === $franc->amount;
-  }
-
-  public static function cast($obj): self
-  {
-    if (!$obj instanceof self) {
-      throw new InvalidArgumentException("{$obj} is not instance of FrancObject");
-    }
-    return $obj;
   }
 }
