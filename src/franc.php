@@ -2,8 +2,8 @@
 
 require_once(dirname(__FILE__) ."/money.php");
 
-class Dollar extends Money{
-
+class Franc extends Money{
+  
   public function __construct(int $amount)
   {
     $this->amount = $amount;
@@ -11,6 +11,6 @@ class Dollar extends Money{
 
   public function times(int $multiplier)
   {
-    return new Dollar($this->amount * $multiplier);
+    return new Franc($this->amount * $multiplier);
   }
 }
