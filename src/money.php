@@ -24,4 +24,9 @@ abstract class Money {
   {
     return new Dollar($amount);
   }
+
+  public static function franc(int $amount): Money
+  {
+    return new Franc($amount);
+  }
 }
