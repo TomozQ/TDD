@@ -1,7 +1,9 @@
 <?php
 
-class Money {
+abstract class Money {
   protected int $amount;
+
+  abstract public function times(int $multiplier): Money;
 
   public function equals(object $object)
   {
@@ -16,5 +18,10 @@ class Money {
       throw new InvalidArgumentException("{$obj} is not instance of MoneyObject");
     }
     return $obj;
+  }
+
+  public static function dollar(int $amount): Money
+  {
+    return new Dollar($amount);
   }
 }

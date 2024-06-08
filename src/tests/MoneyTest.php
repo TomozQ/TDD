@@ -4,12 +4,13 @@ use \PHPUnit\Framework\TestCase;
 
 require_once(dirname(__FILE__) ."/../dollar.php");
 require_once(dirname(__FILE__) ."/../franc.php");
+require_once(dirname(__FILE__) ."/../money.php");
 
 class MoneyTest extends TestCase
 {
   public function testMultiPlication()
   {
-    $five = new Dollar(5);
+    $five = Money::dollar(5);
     $this->assertEquals(new Dollar(10), $five->times(2));
     $this->assertEquals(new Dollar(15), $five->times(3));
   }
