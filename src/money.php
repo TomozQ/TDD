@@ -3,7 +3,20 @@
 abstract class Money {
   protected int $amount;
 
+  protected string $currency;
+
   abstract public function times(int $multiplier): Money;
+
+  public function __construct(int $amount, string $currency) 
+  {
+    $this->amount = $amount;
+    $this->currency = $currency;
+  }
+
+  public function currency() : string
+  {
+    return $this->currency;
+  }
 
   public function equals(object $object)
   {
@@ -20,13 +33,25 @@ abstract class Money {
     return $obj;
   }
 
+  /**
+   * Factory Method
+   * @param int $amount
+   * 
+   * @return Dollar
+   */
   public static function dollar(int $amount): Money
   {
-    return new Dollar($amount);
+    return new Dollar($amount, "USD");
   }
 
+  /**
+   * Factory Method
+   * @param int $amount
+   * 
+   * @return Franc
+   */
   public static function franc(int $amount): Money
   {
-    return new Franc($amount);
+    return new Franc($amount, "CHF");
   }
 }
