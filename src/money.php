@@ -5,6 +5,8 @@ abstract class Money {
 
   abstract public function times(int $multiplier): Money;
 
+  abstract public function currency() : string;
+
   public function equals(object $object)
   {
     $money = $this::cast($object);
