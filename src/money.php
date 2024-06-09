@@ -3,9 +3,14 @@
 abstract class Money {
   protected int $amount;
 
+  protected string $currency;
+
   abstract public function times(int $multiplier): Money;
 
-  abstract public function currency() : string;
+  public function currency() : string
+  {
+    return $this->currency;
+  }
 
   public function equals(object $object)
   {
