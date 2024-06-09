@@ -1,11 +1,14 @@
 <?php
 
-abstract class Money {
+class Money {
   protected int $amount;
 
   protected string $currency;
 
-  abstract public function times(int $multiplier): Money;
+  public function times(int $multiplier): Money
+  {
+    return new Money($this->amount * $multiplier, $this->currency);
+  }
 
   public function __construct(int $amount, string $currency) 
   {
@@ -22,7 +25,7 @@ abstract class Money {
   {
     $money = $this::cast($object);
     return $this->amount === $money->amount
-      && get_class($this) === get_class($money);
+      && $this->currency === $money->currency;
   }
 
   public static function cast($obj): self
@@ -31,6 +34,11 @@ abstract class Money {
       throw new InvalidArgumentException("{$obj} is not instance of MoneyObject");
     }
     return $obj;
+  }
+
+  public function toString(): string
+  {
+    return $this->amount . " " . $this->currency;
   }
 
   /**
