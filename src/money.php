@@ -27,13 +27,25 @@ abstract class Money {
     return $obj;
   }
 
+  /**
+   * Factory Method
+   * @param int $amount
+   * 
+   * @return Dollar
+   */
   public static function dollar(int $amount): Money
   {
-    return new Dollar($amount);
+    return new Dollar($amount, "USD");
   }
 
+  /**
+   * Factory Method
+   * @param int $amount
+   * 
+   * @return Franc
+   */
   public static function franc(int $amount): Money
   {
-    return new Franc($amount);
+    return new Franc($amount, "CHF");
   }
 }
