@@ -35,4 +35,21 @@ class MoneyTest extends TestCase
     $reduced = $bank->reduce($sum, "USD");
     $this->assertEquals(Money::dollar(10), $reduced);
   }
+
+  public function testPlusReturnSum()
+  {
+    $five = Money::dollar(5);
+    $result = $five->plus($five);
+    $sum = self::castSum($result);
+    $this->assertEquals($five, $sum->augend);
+    $this->assertEquals($five, $sum->addend);
+  }
+
+  private static function castSum($obj): Sum
+  {
+    if (!$obj instanceof Sum) {
+      throw new InvalidArgumentException("{$obj} is not instance of SumObject");
+    }
+    return $obj;
+  }
 }
