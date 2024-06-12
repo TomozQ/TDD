@@ -1,6 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__) ."/Expression.php");
+require_once(dirname(__FILE__) ."/sum.php");
 
 class Money implements Expression{
   protected int $amount;
@@ -20,7 +21,12 @@ class Money implements Expression{
 
   public function plus(Money $addend): Expression
   {
-    return new Money($this->amount + $addend->amount, $this->currency);
+    return new Sum($this, $addend);
+  }
+
+  public function reduce(string $to): Money
+  {
+    return $this;
   }
 
   public function currency() : string
@@ -35,7 +41,12 @@ class Money implements Expression{
       && $this->currency === $money->currency;
   }
 
-  public static function cast($obj): self
+  public function amount(): int
+  {
+    return $this->amount;
+  }
+
+  private static function cast($obj): self
   {
     if (!$obj instanceof self) {
       throw new InvalidArgumentException("{$obj} is not instance of MoneyObject");
