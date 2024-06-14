@@ -69,6 +69,11 @@ class MoneyTest extends TestCase
     $this->assertEquals(Money::dollar(1), $result);
   }
 
+  public function testArrayEquals()
+  {
+    $this->assertTrue((object)array("a", "b", "c") === (object)array("a", "b", "c"));
+  }
+
   private static function castSum($obj): Sum
   {
     if (!$obj instanceof Sum) {
