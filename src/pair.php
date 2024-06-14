@@ -9,4 +9,23 @@ class Pair
     $this->from = $from;
     $this->to = $to;
   }
+
+  private static function cast($obj): self
+  {
+    if (!$obj instanceof self) {
+      throw new InvalidArgumentException("{$obj} is not instance of MoneyObject");
+    }
+    return $obj;
+  }
+
+  public function equals(object $object): bool
+  {
+    $pair = $this::cast($object);
+    return $this->from === $pair->from && $this->to === $pair->to;
+  }
+
+  public function hasCode()
+  {
+    return 0;
+  }
 }
