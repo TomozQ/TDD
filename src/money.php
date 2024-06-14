@@ -2,6 +2,7 @@
 
 require_once(dirname(__FILE__) ."/Expression.php");
 require_once(dirname(__FILE__) ."/sum.php");
+require_once(dirname(__FILE__) ."/bank.php");
 
 class Money implements Expression{
   protected int $amount;
@@ -24,9 +25,10 @@ class Money implements Expression{
     return new Sum($this, $addend);
   }
 
-  public function reduce(string $to): Money
+  public function reduce(Bank $bank, string $to): Money
   {
-    return $this;
+    $rate = $bank->rate($this->currency, $to);
+    return new Money($this->amount / $rate, $to);
   }
 
   public function currency() : string
