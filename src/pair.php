@@ -18,6 +18,15 @@ class Pair
     return $obj;
   }
 
+  public function from()
+  {
+    return $this->from;
+  }
+  public function to()
+  {
+    return $this->to;
+  }
+
   public function equals(object $object): bool
   {
     $pair = $this::cast($object);
