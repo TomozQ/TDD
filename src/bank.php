@@ -43,7 +43,6 @@ class Bank
 
     foreach($this->rates as $rate) {
       if ($rate->pair()->from() === $from && $rate->pair()->to() === $to) {
-        var_dump($rate->rate());
         return $rate->rate();
       }
     }
