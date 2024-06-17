@@ -8,6 +8,14 @@ require_once(dirname(__FILE__) ."/../sum.php");
 
 class MoneyTest extends TestCase
 {
+  private static function castSum($obj): Sum
+  {
+    if (!$obj instanceof Sum) {
+      throw new InvalidArgumentException("{$obj} is not instance of SumObject");
+    }
+    return $obj;
+  }
+
   public function testMultiPlication()
   {
     $five = Money::dollar(5);
@@ -84,11 +92,35 @@ class MoneyTest extends TestCase
     $this->assertEquals(1, (new Bank())->rate("USD", "USD"));
   }
 
-  private static function castSum($obj): Sum
+  public function testMixedAddition()
   {
-    if (!$obj instanceof Sum) {
-      throw new InvalidArgumentException("{$obj} is not instance of SumObject");
-    }
-    return $obj;
+    $fiveBucks = Money::dollar(5);
+    $tenFrancs = Money::franc(10);
+    $bank = new Bank();
+    $bank->addRate("CHF", "USD", 2);
+    $result = $bank->reduce($fiveBucks->plus($tenFrancs), "USD");
+    $this->assertEquals(Money::dollar(10), $result);
+  }
+
+  public function testSumPlusMoney()
+  {
+    $fiveBucks = Money::dollar(5);
+    $tenFrancs = Money::franc(10);
+    $bank = new Bank();
+    $bank->addRate("CHF", "USD", 2);
+    $sum = (new Sum($fiveBucks, $tenFrancs))->plus($fiveBucks);
+    $result = $bank->reduce($sum, "USD");
+    $this->assertEquals(Money::dollar(15), $result);
+  }
+  
+  public function testSumTimes()
+  {
+    $fiveBucks = Money::dollar(5);
+    $tenFrancs = Money::franc(10);
+    $bank = new Bank();
+    $bank->addRate("CHF", "USD", 2);
+    $sum = (new Sum($fiveBucks, $tenFrancs))->times(2);
+    $result = $bank->reduce($sum, "USD");
+    $this->assertEquals(Money::dollar(20), $result);
   }
 }
