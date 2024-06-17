@@ -5,13 +5,18 @@ require_once(dirname(__FILE__) ."/Expression.php");
 require_once(dirname(__FILE__) ."/bank.php");
 
 class Sum implements Expression{
-  public Money $augend;
-  public Money $addend;
+  public Expression $augend;
+  public Expression $addend;
 
-  public function __construct(Money $augend, Money $addend) 
+  public function __construct(Expression $augend, Expression $addend) 
   {
     $this->augend = $augend;
     $this->addend = $addend;
+  }
+
+  public function plus(Expression $addend)
+  {
+    return null;
   }
 
   public function reduce(Bank $bank, string $to): Money
